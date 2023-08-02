@@ -115,11 +115,15 @@ export const Invoice: React.FC<{
           Item and client should be selected
         </span>
       )}
-      <SearchBar
-        idInput={idInput}
-        setIdInput={setIdInput}
-        idLoading={idLoading}
-        getInvoiceSubmit={getInvoiceSubmit}
+      <Search
+        value={idInput}
+        onChange={(e) => setIdInput(e.target.value)}
+        placeholder="Invoice search by ID"
+        enterButton="Search"
+        size="large"
+        loading={idLoading}
+        onSearch={getInvoiceSubmit}
+        style={{ marginBottom: "12px" }}
       />
       {error && (
         <div style={{ color: "red", marginBottom: "8px" }}>
@@ -150,25 +154,5 @@ export const Invoice: React.FC<{
         );
       })}
     </div>
-  );
-};
-
-const SearchBar: React.FC<{
-  idInput: string;
-  setIdInput: Dispatch<SetStateAction<string>>;
-  idLoading: boolean;
-  getInvoiceSubmit: () => Promise<void>;
-}> = ({ idInput, setIdInput, idLoading, getInvoiceSubmit }) => {
-  return (
-    <Search
-      value={idInput}
-      onChange={(e) => setIdInput(e.target.value)}
-      placeholder="Invoice search by ID"
-      enterButton="Search"
-      size="large"
-      loading={idLoading}
-      onSearch={getInvoiceSubmit}
-      style={{ marginBottom: "12px" }}
-    />
   );
 };

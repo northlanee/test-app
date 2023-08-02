@@ -1,7 +1,7 @@
-import { Item } from "./Items";
-import { Client } from "./Clients";
+import { Client } from "./clients/Clients";
 import { Invoice } from "./Invoice";
 import { useState } from "react";
+import { Item } from "./items/Items";
 
 export interface IClient {
   id: string;
