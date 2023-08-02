@@ -7,9 +7,9 @@
     "client-install": "cd client && npm install",
     "server-install": "cd server && npm install",
     "install-all-deps": "concurrently \"npm run server-install\" \"npm run client-install\"",
-    "build-client": "cd client && npm run build",
-    "build-server": "cd server && npm run build",
-    "build": "concurrently \"npm run install-all-deps\" && \"npm run build-client\" && \"npm run build-server\"",
+    "buildclient": "cd client && npm run build",
+    "buildserver": "cd server && npm run build",
+    "build": "concurrently \"npm run install-all-deps\" && \"npm run buildclient\" && \"npm run buildserver\"",
     "start": "npm run --prefix server start"
   },
   "repository": {
