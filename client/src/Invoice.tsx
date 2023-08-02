@@ -17,6 +17,7 @@ export const Invoice: React.FC<{
   const [loading, setLoading] = useState(false);
   const [idInput, setIdInput] = useState("");
   const [idLoading, setIdLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const onChangeItem = (value: number) => {
     setSelectedItem(items[value]);
@@ -56,8 +57,14 @@ export const Invoice: React.FC<{
   };
 
   const getInvoiceSubmit = async () => {
+    setError(false);
     setIdInput("");
     setIdLoading(true);
+    if (!idInput) {
+      setError(true);
+      setIdLoading(false);
+      return;
+    }
     const res = await api.get(`invoice/${idInput}`);
     setIdLoading(false);
     if (res.status === 200) {
@@ -114,6 +121,11 @@ export const Invoice: React.FC<{
         idLoading={idLoading}
         getInvoiceSubmit={getInvoiceSubmit}
       />
+      {error && (
+        <div style={{ color: "red", marginBottom: "8px" }}>
+          ID field is empty
+        </div>
+      )}
       {invoices.map((i, idx) => {
         return (
           <Card

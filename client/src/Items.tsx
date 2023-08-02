@@ -13,10 +13,16 @@ export const Item: React.FC<{
 }> = ({ items, setItems }) => {
   const [idInput, setIdInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const [addOpen, setAddOpen] = useState(false);
 
   const getItemSubmit = async () => {
+    setError(false);
+    if (!idInput) {
+      setError(true);
+      return;
+    }
     setIdInput("");
     setLoading(true);
     const res = await api.get(`items/${idInput}`);
@@ -66,6 +72,11 @@ export const Item: React.FC<{
         onSearch={getItemSubmit}
         style={{ marginBottom: "12px" }}
       />
+      {error && (
+        <div style={{ color: "red", marginBottom: "8px" }}>
+          ID field is empty
+        </div>
+      )}
       {items.length > 0 &&
         items.map((item, idx) => (
           <ItemCard item={item} removeItem={removeItem} idx={idx} key={idx} />
@@ -132,9 +143,21 @@ const AddItemModal: React.FC<{
 }> = ({ addOpen, setAddOpen, setItems }) => {
   const [loading, setLoading] = useState(false);
   const [newItem, setNewItem] = useState<Partial<IItem>>(defaultItem);
+  const [error, setError] = useState(false);
 
   const handleOk = async () => {
+    setError(false);
     setLoading(true);
+    if (
+      !newItem.name ||
+      !newItem.description ||
+      !newItem.price ||
+      !newItem.currency
+    ) {
+      setLoading(false);
+      setError(true);
+      return;
+    }
     const res = await api.post("items", newItem);
     if (res.status === 201) {
       setItems((prev) => [...prev, res.data]);
@@ -157,6 +180,11 @@ const AddItemModal: React.FC<{
         confirmLoading={loading}
         onCancel={handleCancel}
       >
+        {error && (
+          <div style={{ color: "red", marginBottom: "8px" }}>
+            All fields required
+          </div>
+        )}
         <p>
           <Input
             placeholder="Name"

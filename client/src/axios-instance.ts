@@ -3,5 +3,5 @@ import axios from "axios";
 export const api = axios;
 
 // export const api = axios.create({
-//   baseURL: `0.0.0.0:${process.env.PORT || 3000}`,
+//   baseURL: "http://localhost:3001/",
 // });

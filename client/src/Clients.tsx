@@ -18,6 +18,7 @@ export const Client: React.FC<{
   const [addOpen, setAddOpen] = useState(false);
 
   const getItemSubmit = async () => {
+    setError(false);
     if (!idInput) {
       setError(true);
       return;
@@ -154,6 +155,7 @@ const AddItemModal: React.FC<{
       !newItem.phone ||
       (newItem.emails && !newItem.emails[0])
     ) {
+      setLoading(false);
       setError(true);
       return;
     }
