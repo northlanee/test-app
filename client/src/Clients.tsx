@@ -173,7 +173,7 @@ const AddItemModal: React.FC<{
             placeholder="Phone"
             value={newItem.phone}
             onChange={(e) =>
-              setNewItem((prev) => ({ ...prev, description: e.target.value }))
+              setNewItem((prev) => ({ ...prev, phone: e.target.value }))
             }
           />
         </p>
