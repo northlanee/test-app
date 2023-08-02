@@ -1,0 +1,26 @@
+{
+  "name": "teat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run --prefix server start",
+    "build": "concurrently npm:modules-install && npm:build-client && npm:build-server",
+    "modules-install": "concurrently \"npm --prefix client install\" \"npm --prefix server install\"",
+    "build-client": "npm run --prefix client build",
+    "build-server": "npm run --prefix server build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northlanee/test-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/northlanee/test-app/issues"
+  },
+  "homepage": "https://github.com/northlanee/test-app#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
