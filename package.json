@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/northlanee/test-app#readme",
   "dependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "yarn": "^1.22.19"
   }
 }
