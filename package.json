@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-client": "npm run --prefix client build",
-    "build-server": "npm run --prefix server build",
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "install-all-deps": "concurrently \"npm run server-install\" \"npm run client-install\"",
+    "build-client": "cd client && npm run build",
+    "build-server": "cd server && npm run build",
     "start": "npm run --prefix server start",
-    "build": "concurrently npm:modules-install && npm:build-client && npm:build-server",
-    "modules-install": "concurrently \"npm --prefix client install\" \"npm --prefix server install\""
+    "build": "concurrently \"npm run install-all-deps\" && \"npm run build-client\" && \"npm run build-server\""
   },
   "repository": {
     "type": "git",
