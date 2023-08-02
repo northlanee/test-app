@@ -149,7 +149,11 @@ const AddItemModal: React.FC<{
   const handleOk = async () => {
     setError(false);
     setLoading(true);
-    if (!newItem.name || !newItem.phone || !newItem.emails[0]) {
+    if (
+      !newItem.name ||
+      !newItem.phone ||
+      (newItem.emails && !newItem.emails[0])
+    ) {
       setError(true);
       return;
     }
