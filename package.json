@@ -4,13 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "cd client && npm install",
-    "server-install": "cd server && npm install",
-    "install-all-deps": "concurrently \"yarn run server-install\" \"yarn run client-install\"",
-    "buildclient": "cd client && yarn run build",
-    "buildserver": "cd server && yarn run build",
-    "build": "concurrently \"yarn run install-all-deps\" && \"yarn run buildclient\" && \"yarn run buildserver\"",
-    "start": "yarn run --prefix server start"
+    "start": "npm run --prefix server start"
   },
   "repository": {
     "type": "git",
