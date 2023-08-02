@@ -137,7 +137,7 @@ const AddItemModal: React.FC<{
 
   const handleOk = async () => {
     setLoading(true);
-    const res = await api.post("items", newItem);
+    const res = await api.post("clients", newItem);
     if (res.status === 201) {
       setClients((prev) => [...prev, res.data]);
       setNewItem(defaultItem);
