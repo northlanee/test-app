@@ -13,10 +13,15 @@ export const Client: React.FC<{
 }> = ({ clients, setClients }) => {
   const [idInput, setIdInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const [addOpen, setAddOpen] = useState(false);
 
   const getItemSubmit = async () => {
+    if (!idInput) {
+      setError(true);
+      return;
+    }
     setIdInput("");
     setLoading(true);
     const res = await api.get(`clients/${idInput}`);
@@ -66,6 +71,11 @@ export const Client: React.FC<{
         onSearch={getItemSubmit}
         style={{ marginBottom: "12px" }}
       />
+      {error && (
+        <div style={{ color: "red", marginBottom: "8px" }}>
+          ID field is empty
+        </div>
+      )}
       {clients.length > 0 &&
         clients.map((client, idx) => (
           <ClientCard
@@ -134,9 +144,15 @@ const AddItemModal: React.FC<{
 }> = ({ addOpen, setAddOpen, setClients }) => {
   const [loading, setLoading] = useState(false);
   const [newItem, setNewItem] = useState<Partial<IClient>>(defaultItem);
+  const [error, setError] = useState(false);
 
   const handleOk = async () => {
+    setError(false);
     setLoading(true);
+    if (!newItem.name || !newItem.phone || !newItem.emails[0]) {
+      setError(true);
+      return;
+    }
     const res = await api.post("clients", newItem);
     if (res.status === 201) {
       setClients((prev) => [...prev, res.data]);
@@ -159,6 +175,11 @@ const AddItemModal: React.FC<{
         confirmLoading={loading}
         onCancel={handleCancel}
       >
+        {error && (
+          <div style={{ color: "red", marginBottom: "8px" }}>
+            All fields required
+          </div>
+        )}
         <p>
           <Input
             placeholder="Name"
